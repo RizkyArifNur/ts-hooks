@@ -1,0 +1,25 @@
+{
+  "name": "ts-hooks",
+  "version": "0.0.1",
+  "description": "Hooks as you want",
+  "main": "./dist/index.js",
+  "repository": "https://github.com/RizkyArifNur/ts-hooks.git",
+  "author": "Rizky Arif Nur Choir",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "lint": "tslint src/*.ts",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"example/**/*.ts\"",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A",
+    "postversion": "git checkout master && git merge dev && git push"
+  },
+  "devDependencies": {
+    "prettier": "^1.17.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.4"
+  }
+}
