@@ -16,7 +16,8 @@
     ],
     "space-before-function-paren": false,
     "comment-type": [false, "doc", "multiline"],
-    "member-access": false
+    "member-access": false,
+    "only-arrow-functions": false
   },
   "rulesDirectory": []
 }

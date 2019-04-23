@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node src"
+  },
   "dependencies": {
     "ts-hooks": "file:../"
+  },
+  "devDependencies": {
+    "ts-node": "^8.1.0"
   }
 }
