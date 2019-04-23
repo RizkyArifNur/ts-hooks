@@ -11,6 +11,8 @@ class TryHooks {
    * add hooks before target function called
    * NOTE : you can pass the Async hooks to the sync function, but
    * your hooks will not awaited
+   * the first argument are event (AFTER | BEFORE)
+   * the next argument are hooks function that will be called (REST params)
    */
   @addHooks('BEFORE', firstSyncHook)
   syncFunctionsWithHookBefore() {
@@ -61,8 +63,8 @@ class TryHooks {
   }
 
   /**
-   * you also can handle the async function with hooks,
-   * and you also can pass the sync or Async hook to the Async function
+   * you can also handle the async function with hooks,
+   * and you can also pass the sync or Async hook to the Async function
    * it will work fine :D
    */
   @addAsyncHooks('BEFORE', firstAsyncHook)
@@ -74,7 +76,7 @@ class TryHooks {
    * this function are same like the Async function above
    */
   @addAsyncHooks('BEFORE', firstAsyncHook)
-  functionWithReturnPromise() {
+  functionWhichReturnPromise() {
     return new Promise(resolve => {
       setTimeout(() => resolve('Yeay we can handle this too !!'))
     })
@@ -82,4 +84,7 @@ class TryHooks {
 }
 
 const tryHooks = new TryHooks()
-// trySyncHooks.syncFunctionsWithHookBefore('first params')
+/**
+ * and you can call it like a common function
+ */
+tryHooks.syncFunctionsWithHookBefore()
