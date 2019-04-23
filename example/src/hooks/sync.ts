@@ -7,9 +7,7 @@ export function secondSyncHook() {
 }
 
 export function hookWithParams(param1: string, param2: number) {
-  console.log(
-    `this is second synchronous hooks with params:{ ${param1} ${param2} }`
-  )
+  console.log(`this is synchronous hooks with params:{ ${param1} ${param2} }`)
 }
 
 export function hookWithError() {

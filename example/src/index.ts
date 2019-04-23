@@ -75,7 +75,7 @@ class TryHooks {
   /**
    * this function are same like the Async function above
    */
-  @addAsyncHooks('BEFORE', firstAsyncHook)
+  @addAsyncHooks('AFTER', firstAsyncHook)
   functionWhichReturnPromise() {
     return new Promise(resolve => {
       setTimeout(() => resolve('Yeay we can handle this too !!'))
