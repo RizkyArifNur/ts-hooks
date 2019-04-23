@@ -1,7 +1,7 @@
 import { Events } from './event'
 
 /**
- * add hooks to synchronous function
+ * add hooks to asynchronous function
  * @remarks
  * this function will return a method decorators that will add hooks to the target function
  * there is two events : `AFTER` and `BEFORE`
