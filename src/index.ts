@@ -1,2 +1,1 @@
-export { addAsyncHooks, addHooks } from './decorators'
-export { Next } from './decorators/types'
+export { addAsyncHooks, addHooks, Next } from './decorators'
