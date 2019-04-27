@@ -10,7 +10,7 @@ class TryHooks {
     return 'this is returned value from origin with params ' + coba
   }
 
-  @addAsyncHooks([secondHooks], [firstAsyncHooks], true)
+  @addAsyncHooks([firstAsyncHooks], [], true)
   async tryNewAsyncHooks(coba: string) {
     console.log('origin invoked')
     return 'this is returned from origin async hooks with params ' + coba
@@ -19,9 +19,9 @@ class TryHooks {
 
 function firstAsyncHooks(_next: Next, coba: any) {
   console.log('this is first async hooks with params', coba)
-  return new Promise((resolve, _reject) => {
+  return new Promise((_resolve, _reject) => {
     setTimeout(() => {
-      resolve(new Error('hehe'))
+      _reject(new Error('hehe'))
       _next('hoho')
     }, 2000)
   })
@@ -47,4 +47,5 @@ const tryHooks = new TryHooks()
 tryHooks
   .tryNewAsyncHooks('hehe')
   .then(result => console.log('returned value is', result))
+  .catch(err => console.log(err))
 // tryAsync().then(result => console.log(result))
