@@ -182,9 +182,9 @@ function addAsyncHooksAsMiddlewareDecorators(
 export function addAsyncHooks<T extends boolean>(
   hooksBefore: T extends true ? HooksFunctionsAsMiddleware : HooksFunctions,
   hooksAfter: T extends true ? HooksFunctionsAsMiddleware : HooksFunctions,
-  asMiddleware: T
+  asMiddleware?: T
 ) {
-  if (asMiddleware === true) {
+  if (asMiddleware) {
     return addAsyncHooksAsMiddlewareDecorators(hooksBefore, hooksAfter)
   } else {
     return addAsyncHooksDescorators(hooksBefore, hooksAfter)

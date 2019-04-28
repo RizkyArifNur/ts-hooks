@@ -152,9 +152,9 @@ function addSyncHooksAsMiddleware(
 export function addHooks<T extends boolean>(
   hooksBefore: T extends true ? HooksFunctionsAsMiddleware : HooksFunctions,
   hooksAfter: T extends true ? HooksFunctionsAsMiddleware : HooksFunctions,
-  asMiddleware: T
+  asMiddleware?: T
 ) {
-  if (asMiddleware === true) {
+  if (asMiddleware) {
     return addSyncHooksAsMiddleware(hooksBefore, hooksAfter)
   } else {
     return addSyncHooks(hooksBefore, hooksAfter)
