@@ -85,6 +85,12 @@ class TryHooks {
     })
   }
 
+  /**
+   * this is an example for hooks with middleware concept,
+   * you just set the third param to true and the `ts-hooks` will
+   * treat your hooks function like a middleware concept
+   * @param param1
+   */
   @addHooks([hookAsMiddleware], [], true)
   functionWithHookAsMiddleware(param1: string) {
     console.log('this is origin function with params : ', param1)
