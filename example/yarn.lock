@@ -35,11 +35,10 @@ source-map@^0.6.0:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-"ts-hooks@file:..":
-  version "0.0.1"
-
-"ts-hooks@file:../":
-  version "0.0.1"
+ts-hooks@^0.1.0-rc1:
+  version "0.1.0-rc1"
+  resolved "https://registry.yarnpkg.com/ts-hooks/-/ts-hooks-0.1.0-rc1.tgz#c33e97e7128c6df20a7b470d17d01602ecf20730"
+  integrity sha512-MnOv6SoFbEhVroJ/NUx5ROn6LU/AiyeJP/VUHFRKfywYMkqLThbqEYGUb303M1NtHN+clsbPuVTS9Q4DCZJAxg==
 
 ts-node@^8.1.0:
   version "8.1.0"

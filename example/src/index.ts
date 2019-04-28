@@ -11,10 +11,12 @@ class TryHooks {
    * add hooks before target function called
    * NOTE : you can pass the Async hooks to the sync function, but
    * your hooks will not awaited
-   * the first argument are event (AFTER | BEFORE)
-   * the next argument are hooks function that will be called (REST params)
+   * the first argument is array of hooks that will be called before the original function called
+   * the second argument is array of hooks that will be called after the original function called
+   * the last argument is optional, if you set it to `true` then the hooks function will
+   * executed like middleware, otherwise the hooks will executed like common function
    */
-  @addHooks('BEFORE', firstSyncHook)
+  @addHooks([firstSyncHook], [], false)
   syncFunctionsWithHookBefore() {
     console.log(
       'this is the target function with single hook before this function called'
@@ -24,7 +26,7 @@ class TryHooks {
   /**
    * add hooks after target function called
    */
-  @addHooks('AFTER', firstSyncHook)
+  @addHooks([], [firstSyncHook], false)
   syncFunctionWithHookAfter() {
     console.log(
       'this is the target function with single hook after this function called'
@@ -37,7 +39,7 @@ class TryHooks {
    * in this case, `firstSyncHook` will executed first and after it done
    * the `secondSyncHook` will be executed
    */
-  @addHooks('BEFORE', firstSyncHook, secondSyncHook)
+  @addHooks([firstSyncHook, secondSyncHook], [], false)
   syncFunctionWithMultipleHooks() {
     console.log('this is the target function with multiple hooks')
   }
@@ -46,7 +48,7 @@ class TryHooks {
    * you can pass params just like a common functions
    * and your hooks will have same params like the target function
    */
-  @addHooks('BEFORE', hookWithParams)
+  @addHooks([hookWithParams], [], false)
   functionWithHooksAndParams(param1: string, param2: number) {
     console.log(
       `this is the target function with hooks and params :{${param1} ${param2}} `
@@ -57,7 +59,7 @@ class TryHooks {
    * if your hooks are throwing an error, the next step will not executed
    * because hooks are run synchronously
    */
-  @addHooks('BEFORE', hookWithError)
+  @addHooks([hookWithError], [], false)
   functionWithErrorHook() {
     console.log('This statement will not executed')
   }
@@ -67,7 +69,7 @@ class TryHooks {
    * and you can also pass the sync or Async hook to the Async function
    * it will work fine :D
    */
-  @addAsyncHooks('BEFORE', firstAsyncHook)
+  @addAsyncHooks([firstAsyncHook], [], false)
   async functionWithAsyncHook() {
     console.log('Yeay we can handle async function too :D !!')
   }
@@ -75,7 +77,7 @@ class TryHooks {
   /**
    * this function are same like the Async function above
    */
-  @addAsyncHooks('AFTER', firstAsyncHook)
+  @addAsyncHooks([firstAsyncHook], [], false)
   functionWhichReturnPromise() {
     return new Promise(resolve => {
       setTimeout(() => resolve('Yeay we can handle this too !!'))

@@ -7,7 +7,7 @@
     "start": "ts-node src"
   },
   "dependencies": {
-    "ts-hooks": "file:../"
+    "ts-hooks": "^0.1.0-rc1"
   },
   "devDependencies": {
     "ts-node": "^8.1.0"
