@@ -36,9 +36,9 @@ source-map@^0.6.0:
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 ts-hooks@^0.1.0-rc1:
-  version "0.1.0-rc1"
-  resolved "https://registry.yarnpkg.com/ts-hooks/-/ts-hooks-0.1.0-rc1.tgz#c33e97e7128c6df20a7b470d17d01602ecf20730"
-  integrity sha512-MnOv6SoFbEhVroJ/NUx5ROn6LU/AiyeJP/VUHFRKfywYMkqLThbqEYGUb303M1NtHN+clsbPuVTS9Q4DCZJAxg==
+  version "0.1.0-rc2"
+  resolved "https://registry.yarnpkg.com/ts-hooks/-/ts-hooks-0.1.0-rc2.tgz#aa3fc140f4aa3e9c2a20744cf2fd7b7a6c72fca0"
+  integrity sha512-SopKhGl+r26OPAoSxWp0uNkw6odwmdH78bXRkh+8tXUU1NyoV1FTugMxBXlYuDc9xv9XSisOULau5M0pXwfWHQ==
 
 ts-node@^8.1.0:
   version "8.1.0"

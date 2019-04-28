@@ -2,6 +2,7 @@ import { addAsyncHooks, addHooks } from 'ts-hooks'
 import {
   firstAsyncHook,
   firstSyncHook,
+  hookAsMiddleware,
   hookWithError,
   hookWithParams,
   secondSyncHook
@@ -83,10 +84,15 @@ class TryHooks {
       setTimeout(() => resolve('Yeay we can handle this too !!'))
     })
   }
+
+  @addHooks([hookAsMiddleware], [], true)
+  functionWithHookAsMiddleware(param1: string) {
+    console.log('this is origin function with params : ', param1)
+  }
 }
 
 const tryHooks = new TryHooks()
 /**
  * and you can call it like a common function
  */
-tryHooks.syncFunctionsWithHookBefore()
+tryHooks.functionWithHookAsMiddleware('origin params')
