@@ -16,7 +16,7 @@
     "prepublishOnly": "yarn lint",
     "preversion": "yarn lint",
     "version": "yarn format && git add -A",
-    "postversion": "git checkout master && git merge dev && git push"
+    "postversion": "git checkout master && git merge dev && git push && git checkout dev"
   },
   "devDependencies": {
     "prettier": "^1.17.0",
