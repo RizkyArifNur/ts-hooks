@@ -1,6 +1,6 @@
 {
   "name": "ts-hooks",
-  "version": "0.1.0-rc5",
+  "version": "0.1.0-rc6",
   "description": "Hooks as you want",
   "main": "./dist/index.js",
   "repository": "https://github.com/RizkyArifNur/ts-hooks.git",
