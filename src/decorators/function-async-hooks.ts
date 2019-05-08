@@ -108,34 +108,17 @@ function addAsyncHooksAsMiddlewareDecorators(
              */
             const nextArguments = nextArgs.length > 0 ? nextArgs : args
             if (nextProcess === originalFunction) {
-              nextProcess
-                .call(this, ...nextArguments)
-                .then(result => {
-                  returnedValue = result
-                  /**
-                   * if the next process is the target function / original function
-                   * we will call `next` callback manually, because we not provide `next` callback to the
-                   * original function
-                   */
-                  next(...nextArguments)
-                })
-                .catch(err => {
-                  throw new Error(err)
-                })
+              nextProcess.call(this, ...nextArguments).then(result => {
+                returnedValue = result
+                /**
+                 * if the next process is the target function / original function
+                 * we will call `next` callback manually, because we not provide `next` callback to the
+                 * original function
+                 */
+                next(...nextArguments)
+              })
             } else {
-              const resultOfCurrentProcess = nextProcess.call(
-                this,
-                next,
-                ...nextArguments
-              )
-              /**
-               * if the next process is return a promise so we will catch the error
-               */
-              if (resultOfCurrentProcess instanceof Promise) {
-                resultOfCurrentProcess.catch(err => {
-                  throw new Error(err)
-                })
-              }
+              nextProcess.call(this, next, ...nextArguments)
             }
           }
         }
@@ -164,7 +147,7 @@ function addAsyncHooksAsMiddlewareDecorators(
 
         return returnedValue
       } catch (error) {
-        throw new Error(error)
+        console.log(error)
       }
     }
   }
