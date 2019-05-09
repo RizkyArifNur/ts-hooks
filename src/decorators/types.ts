@@ -13,4 +13,4 @@ export type HooksFunctions = Array<(...args: any[]) => any>
 export type HooksFunctionsAsMiddleware = Array<
   (next: Next, ...args: any[]) => any
 >
-export type Next = (...args: any[]) => any
+export type Next = (...args: any[]) => Promise<any>

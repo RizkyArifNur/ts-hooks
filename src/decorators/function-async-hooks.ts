@@ -95,7 +95,7 @@ function addAsyncHooksAsMiddlewareDecorators(
        * it's means that the process will be terminated/stopped
        * @param nextArgs params that will be passed for the next functions/process
        */
-      const next = (...nextArgs) => {
+      const next = async function(...nextArgs) {
         /**
          * `next` callback can't be called in the last process
          */
@@ -112,17 +112,15 @@ function addAsyncHooksAsMiddlewareDecorators(
            */
           const nextArguments = nextArgs.length > 0 ? nextArgs : args
           if (nextProcess === originalFunction) {
-            nextProcess.call(scope, ...nextArguments).then(result => {
-              returnedValue = result
-              /**
-               * if the next process is the target function / original function
-               * we will call `next` callback manually, because we not provide `next` callback to the
-               * original function
-               */
-              next(...nextArguments)
-            })
+            returnedValue = await nextProcess.call(scope, ...nextArguments)
+            /**
+             * if the next process is the target function / original function
+             * we will call `next` callback manually, because we not provide `next` callback to the
+             * original function
+             */
+            await next(...nextArguments)
           } else {
-            nextProcess.call(scope, next, ...nextArguments)
+            await nextProcess.call(scope, next, ...nextArguments)
           }
         }
       }
@@ -144,7 +142,7 @@ function addAsyncHooksAsMiddlewareDecorators(
        */
       if (process === originalFunction) {
         returnedValue = await process.call(scope, ...args)
-        next.call(scope, next, ...args)
+        await next.call(scope, next, ...args)
       } else {
         await process.call(scope, next, ...args)
       }
