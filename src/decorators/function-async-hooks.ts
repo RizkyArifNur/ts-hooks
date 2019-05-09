@@ -67,7 +67,7 @@ function addAsyncHooksAsMiddlewareDecorators(
      * store the original function, beacause we will call it later
      */
     const originalFunction = descriptor.value
-    descriptor.value = async (...args: any[]) => {
+    descriptor.value = async function(...args: any[]) {
       /**
        * array that will be used for storing the proccess or function that
        * will be executed in sequence
@@ -83,6 +83,11 @@ function addAsyncHooksAsMiddlewareDecorators(
        * value that indicates where is the current process position in array `processes` above
        */
       let processPosition = 0
+
+      /**
+       * save scope
+       */
+      const scope = this
 
       /**
        * if this function invoked in hooks functions it will be
@@ -107,7 +112,7 @@ function addAsyncHooksAsMiddlewareDecorators(
            */
           const nextArguments = nextArgs.length > 0 ? nextArgs : args
           if (nextProcess === originalFunction) {
-            nextProcess.call(this, ...nextArguments).then(result => {
+            nextProcess.call(scope, ...nextArguments).then(result => {
               returnedValue = result
               /**
                * if the next process is the target function / original function
@@ -117,7 +122,7 @@ function addAsyncHooksAsMiddlewareDecorators(
               next(...nextArguments)
             })
           } else {
-            nextProcess.call(this, next, ...nextArguments)
+            nextProcess.call(scope, next, ...nextArguments)
           }
         }
       }
@@ -138,10 +143,10 @@ function addAsyncHooksAsMiddlewareDecorators(
        * and invoked `next` callback manually
        */
       if (process === originalFunction) {
-        returnedValue = await process.call(this, ...args)
-        next(...args)
+        returnedValue = await process.call(scope, ...args)
+        next.call(scope, next, ...args)
       } else {
-        await process.call(this, next, ...args)
+        await process.call(scope, next, ...args)
       }
 
       return returnedValue

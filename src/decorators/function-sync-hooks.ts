@@ -77,13 +77,18 @@ function addSyncHooksAsMiddleware(
        * value that indicates where is the current process position in array `processes` above
        */
       let processPosition = 0
+
+      /**
+       * save scope
+       */
+      const scope = this
       /**
        * if this function invoked in hooks functions it will be
        * executed the next process, otherwise the next functions/process will not executed,
        * it's means that the process will be terminated/stopped
        * @param nextArgs params that will be passed for the next functions/process
        */
-      const next = (...nextArgs) => {
+      const next = function(...nextArgs) {
         /**
          * `next` callback can't be called in the last process
          */
@@ -100,7 +105,7 @@ function addSyncHooksAsMiddleware(
            */
           const nextArguments = nextArgs.length > 0 ? nextArgs : args
           if (nextProcess === originalFunction) {
-            returnedValue = nextProcess.call(this, ...nextArguments)
+            returnedValue = nextProcess.call(scope, ...nextArguments)
             /**
              * if the next process is the target function / original function
              * we will call `next` callback manually, because we not provide `next` callback to the
@@ -108,7 +113,7 @@ function addSyncHooksAsMiddleware(
              */
             next(...nextArguments)
           } else {
-            nextProcess.call(this, next, ...nextArguments)
+            nextProcess.call(scope, next, ...nextArguments)
           }
         }
       }
@@ -129,10 +134,10 @@ function addSyncHooksAsMiddleware(
        * and invoked `next` callback manually
        */
       if (process === originalFunction) {
-        returnedValue = process.call(this, ...args)
+        returnedValue = process.call(scope, ...args)
         next(...args)
       } else {
-        process.call(this, next, ...args)
+        process.call(scope, next, ...args)
       }
 
       return returnedValue
